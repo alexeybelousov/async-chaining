@@ -1,11 +1,14 @@
 {
   "name": "async-chaining",
   "version": "0.1.2",
-  "main": "index.js",
-  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "prepublish": "npm run build && npm run test",
   "description": "The async-chaining library provides a toolkit for creating asynchronous chains of method and property calls. With its help, you can effectively manage asynchronous operations, increasing the efficiency and convenience of development.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --env development --watch",
+    "build": "webpack --env production",
+    "test": "jest --env=jsdom"
   },
   "repository": {
     "type": "git",
@@ -22,5 +25,34 @@
   "bugs": {
     "url": "https://github.com/alexeybelousov/async-chaining/issues"
   },
-  "homepage": "https://github.com/alexeybelousov/async-chaining#readme"
+  "homepage": "https://github.com/alexeybelousov/async-chaining#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run build && npm run test"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.20.0",
+    "@typescript-eslint/parser": "^5.20.0",
+    "babel-loader": "^8.2.4",
+    "eslint": "^8.13.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-webpack-plugin": "^3.1.1",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.3",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "@thrall/async-chain": "^1.0.10"
+  }
 }

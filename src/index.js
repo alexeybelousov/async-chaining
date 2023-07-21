@@ -1,28 +1,35 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable no-useless-catch */
+/* eslint-disable arrow-body-style */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+/* eslint-disable no-console */
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable no-undef */
 const isPropertyExist = (target, property) => {
   return target && typeof target[property] !== 'undefined';
-}
+};
 
 export const async = (target, options) => {
-  let initTarget = target || window;
+  const initTarget = target || window;
 
   let promiseChain = initTarget instanceof Promise
     ? initTarget
     : Promise.resolve(initTarget);
 
-  let defaultOptions = {
+  const defaultOptions = {
     debug: false,
     ...options,
-  }
+  };
 
   const createProxy = () => {
     return new Proxy(Function, {
-      get: function(_, property) {
+      get(_, property) {
         defaultOptions.debug && console.log(`trap get: property ${property}`);
 
         if (property === 'then' || property === 'catch' || property === 'finally') {
-          return promiseChain[property].bind(promiseChain)
+          return promiseChain[property].bind(promiseChain);
         }
-        
+
         promiseChain = promiseChain.then((target) => {
           if (property === 'async') {
             return [target, property];
@@ -36,10 +43,10 @@ export const async = (target, options) => {
 
               throw new Error(`Property not defined ${propName}`);
             }
-  
+
             return null;
           }
-    
+
           let value;
 
           if (typeof target[property] === 'function') {
@@ -56,7 +63,7 @@ export const async = (target, options) => {
         return createProxy();
       },
 
-      apply: function(_, __, argumentsList) {
+      apply(_, __, argumentsList) {
         defaultOptions.debug && console.log(`trap apply: call with arguments ${argumentsList}`);
 
         promiseChain = promiseChain.then(async (state) => {
@@ -67,14 +74,14 @@ export const async = (target, options) => {
           }
 
           let result;
-    
-          try {
-            let [thisArg, callee] = state;
 
-            if (callee === 'async') {  
+          try {
+            const [thisArg, callee] = state;
+
+            if (callee === 'async') {
               result = await argumentsList[0](thisArg);
             } else {
-              result = await callee.apply(thisArg, argumentsList);  
+              result = await callee.apply(thisArg, argumentsList);
             }
 
             defaultOptions.debug && console.log(`trap apply: add chain with result ${result}`);
@@ -88,7 +95,7 @@ export const async = (target, options) => {
         return createProxy();
       },
     });
-  }
+  };
 
   return createProxy();
-}
+};
