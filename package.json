@@ -1,6 +1,6 @@
 {
   "name": "async-chaining",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.js",
   "type": "module",
   "description": "The async-chaining library provides a toolkit for creating asynchronous chains of method and property calls. With its help, you can effectively manage asynchronous operations, increasing the efficiency and convenience of development.",
