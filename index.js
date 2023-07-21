@@ -2,7 +2,7 @@ export const isPropertyExist = (target, property) => {
   return target && typeof target[property] !== 'undefined';
 }
 
-export const async = (target, options) => {
+export const asyncChain = (target, options) => {
   let initTarget = target || window;
 
   let promiseChain = initTarget instanceof Promise
@@ -24,7 +24,7 @@ export const async = (target, options) => {
         }
         
         promiseChain = promiseChain.then((target) => {
-          if (property === 'async') {
+          if (property === 'asyncChain') {
             return [target, property];
           }
 
@@ -71,7 +71,7 @@ export const async = (target, options) => {
           try {
             let [thisArg, callee] = state;
 
-            if (callee === 'async') {  
+            if (callee === 'asyncChain') {  
               result = await argumentsList[0](thisArg);
             } else {
               result = await callee.apply(thisArg, argumentsList);  
