@@ -1,8 +1,8 @@
-export const isPropertyExist = (target, property) => {
+const isPropertyExist = (target, property) => {
   return target && typeof target[property] !== 'undefined';
 }
 
-export const asyncChain = (target, options) => {
+export const async = (target, options) => {
   let initTarget = target || window;
 
   let promiseChain = initTarget instanceof Promise
@@ -24,7 +24,7 @@ export const asyncChain = (target, options) => {
         }
         
         promiseChain = promiseChain.then((target) => {
-          if (property === 'asyncChain') {
+          if (property === 'async') {
             return [target, property];
           }
 
@@ -56,7 +56,7 @@ export const asyncChain = (target, options) => {
         return createProxy();
       },
 
-      apply: function(_, _, argumentsList) {
+      apply: function(_, __, argumentsList) {
         defaultOptions.debug && console.log(`trap apply: call with arguments ${argumentsList}`);
 
         promiseChain = promiseChain.then(async (state) => {
@@ -71,7 +71,7 @@ export const asyncChain = (target, options) => {
           try {
             let [thisArg, callee] = state;
 
-            if (callee === 'asyncChain') {  
+            if (callee === 'async') {  
               result = await argumentsList[0](thisArg);
             } else {
               result = await callee.apply(thisArg, argumentsList);  

@@ -8,10 +8,10 @@ npm i async-chaining
 
 ## Usage example
 ```js
-import { asyncChain } from 'async-chaining';
+import { async } from 'async-chaining';
 
 // await
-const repoId = await asyncChain()
+const repoId = await async()
   .fetch('https://api.github.com/repositories')
   .json()
   .find(repo => repo.name === 'ambition')
@@ -22,11 +22,11 @@ const repoId = await asyncChain()
 const fetchRepos = fetch('https://api.github.com/repositories');
 const fetchRepoById = (id) => fetch('https://api.github.com/repositories/' + id);
 
-const watchers = asyncChain(fetchRepos)
+const watchers = async(fetchRepos)
   .json()
   .find(repo => repo.name === 'ambition')
   .id
-  .asyncChain(fetchRepoById)
+  .async(fetchRepoById)
   .json()
   .watchers;
 
