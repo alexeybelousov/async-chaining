@@ -1,0 +1,26 @@
+{
+  "name": "async-chaining",
+  "version": "0.0.2",
+  "main": "index.js",
+  "type": "module",
+  "description": "The async-chaining library provides a toolkit for creating asynchronous chains of method and property calls. With its help, you can effectively manage asynchronous operations, increasing the efficiency and convenience of development.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexeybelousov/async-chaining.git"
+  },
+  "keywords": [
+    "async",
+    "promise",
+    "chain",
+    "await"
+  ],
+  "author": "Alexey Belousov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexeybelousov/async-chaining/issues"
+  },
+  "homepage": "https://github.com/alexeybelousov/async-chaining#readme"
+}
