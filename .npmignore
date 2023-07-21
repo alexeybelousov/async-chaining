@@ -1,2 +1,8 @@
 src/
-tests/
+test/
+.babelrc
+.eslintrc
+.eslintignore
+tsconfig.json
+webpack.config.js
+.idea
