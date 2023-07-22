@@ -1,15 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-useless-catch */
 /* eslint-disable arrow-body-style */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-shadow */
-/* eslint-disable no-undef */
-const isPropertyExist = (target, property) => {
-  return target && typeof target[property] !== 'undefined';
-};
+import { isPropertyExist } from '../utils';
 
-const async = (target, options) => {
+/* eslint-disable no-undef */
+const async = <T>(target: T, options?: { debug: boolean }): T => {
   const initTarget = target || window;
 
   let promiseChain = initTarget instanceof Promise
@@ -21,9 +20,9 @@ const async = (target, options) => {
     ...options,
   };
 
-  const createProxy = () => {
+  const createProxy = (): any => {
     return new Proxy(Function, {
-      get(_, property) {
+      get(_, property: string) {
         defaultOptions.debug && console.log(`trap get: property ${property}`);
 
         if (property === 'then' || property === 'catch' || property === 'finally') {
@@ -47,7 +46,7 @@ const async = (target, options) => {
             return null;
           }
 
-          let value;
+          let value: unknown;
 
           if (typeof target[property] === 'function') {
             value = [target, target[property]];
@@ -97,7 +96,7 @@ const async = (target, options) => {
     });
   };
 
-  return createProxy();
+  return createProxy() as T;
 };
 
 export default async;
