@@ -1,14 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-useless-catch */
 /* eslint-disable arrow-body-style */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-shadow */
-import { isPropertyExist } from '../utils';
-
 /* eslint-disable no-undef */
-const async = <T>(target: T, options?: { debug: boolean }): T => {
+const isPropertyExist = (target, property) => {
+  return target && typeof target[property] !== 'undefined';
+};
+
+const async = (target, options) => {
   const initTarget = target || window;
 
   let promiseChain = initTarget instanceof Promise
@@ -20,9 +21,9 @@ const async = <T>(target: T, options?: { debug: boolean }): T => {
     ...options,
   };
 
-  const createProxy = (): any => {
+  const createProxy = () => {
     return new Proxy(Function, {
-      get(_, property: string) {
+      get(_, property) {
         defaultOptions.debug && console.log(`trap get: property ${property}`);
 
         if (property === 'then' || property === 'catch' || property === 'finally') {
@@ -46,7 +47,7 @@ const async = <T>(target: T, options?: { debug: boolean }): T => {
             return null;
           }
 
-          let value: unknown;
+          let value;
 
           if (typeof target[property] === 'function') {
             value = [target, target[property]];
@@ -96,7 +97,7 @@ const async = <T>(target: T, options?: { debug: boolean }): T => {
     });
   };
 
-  return createProxy() as T;
+  return createProxy();
 };
 
 export default async;

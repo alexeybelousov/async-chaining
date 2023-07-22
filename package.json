@@ -1,8 +1,8 @@
 {
   "name": "async-chaining",
-  "version": "0.1.6",
-  "main": "dist/index.ts",
-  "module": "dist/index.ts",
+  "version": "0.1.7",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "prepublish": "npm run build && npm run test",
   "description": "The async-chaining library provides a toolkit for creating asynchronous chains of method and property calls. With its help, you can effectively manage asynchronous operations, increasing the efficiency and convenience of development.",
   "scripts": {
