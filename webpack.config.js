@@ -9,10 +9,10 @@ module.exports = ({ development }) => ({
     filename: 'index.js',
     path: path.resolve(__dirname, 'dist'),
     library: 'async-chaining',
-    libraryExport: 'default',
     libraryTarget: 'umd',
     umdNamedDefine: true,
     globalObject: 'typeof self === \'undefined\' ? this : self',
+    clean: true
   },
   resolve: {
     extensions: ['.ts'],

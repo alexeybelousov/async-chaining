@@ -1,6 +1,4 @@
-/* eslint-disable import/extensions */
-import async from './lib/async.js';
+/* eslint-disable import/prefer-default-export */
+import async from './lib/async';
 
 export { async };
-
-export default { async };
