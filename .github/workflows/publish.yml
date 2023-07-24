@@ -37,7 +37,7 @@ jobs:
       - run:
           npm version ${{ github.event.inputs.version }}
           git push origin master
-          git push origin v${{ github.event.inputs.version }}
+          git push origin --tags
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
