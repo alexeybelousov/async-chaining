@@ -1,6 +1,6 @@
 {
   "name": "async-chaining",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "prepublish": "npm run build && npm run test",
