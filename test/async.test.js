@@ -22,9 +22,9 @@ describe('async-chaining library:', () => {
     test('should be called with 2 arguments', async () => {
       const result = await async(Promise.resolve({ username: 'Username' }), { debug: true })
         .username
-        .toUpperCase();
+        .toLowerCase();
         
-      expect(result).toBe('USERNAME');
+      expect(result).toBe('username');
     });
 
     test('Accessing a not defined property should return null', async () => {
