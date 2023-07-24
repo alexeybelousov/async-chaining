@@ -33,11 +33,7 @@ const async = (obj, options) => {
 
         if (!isPropertyExist(target, property)) {
           if (target) {
-            const propName = target.constructor
-              ? `${target.constructor.name}.${property}`
-              : `${target.name}[${property}]`;
-
-            throw new Error(`Property not defined ${propName}`);
+            throw new Error(`Property not defined ${target.constructor.name}.${property}`);
           }
 
           return null;
