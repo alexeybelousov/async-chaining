@@ -19,6 +19,10 @@ jobs:
           node-version: 14
       - run: npm ci
       - run: npm test
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   publish-npm:
     needs: build
