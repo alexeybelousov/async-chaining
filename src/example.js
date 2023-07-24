@@ -1,4 +1,7 @@
-var { async } = require('async-chaining')
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable @typescript-eslint/semi */
+const { async } = require('async-chaining')
 
 const myPromise = new Promise((resolve) => {
   setTimeout(() => {
