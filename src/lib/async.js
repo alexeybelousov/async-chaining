@@ -63,12 +63,6 @@ const async = (obj, options) => {
       defaultOptions.debug && console.log(`trap apply: call with arguments ${argumentsList}`);
 
       promiseChain = promiseChain.then(async (data) => {
-        if (!Array.isArray(data)) {
-          defaultOptions.debug && console.log(`trap apply: add microtask with result ${data}`);
-
-          return data;
-        }
-
         let result;
 
         try {
