@@ -129,4 +129,19 @@ describe('async-chaining library:', () => {
         });
     });
   });
+
+  describe('.debug method:', () => {
+    test('should be called correctly', async () => {
+      async(Promise.resolve({ user: { name: 'User' }}))
+        .debug()
+        .user
+        .name
+        .chain((data) => {
+          return data;
+        })
+        .then((result) => {
+          expect(result).toBe('User');
+        });
+    });
+  });
 });

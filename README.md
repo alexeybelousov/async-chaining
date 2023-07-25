@@ -69,6 +69,22 @@ async()
   .json()
   .watchers;
 ```
+### `.debug(): Promise<prev>`
+The `.debug` method can help you to debug the chain. Its call activates debugging mode and each step of the chain will be logged into the console.
+```js
+async()
+  .debug()
+  .fetch('https://api.github.com/repositories/26')
+  .json()
+  .watchers;
+
+// trap apply: add chain with result [object Window]
+// trap get: add microtask with value [object Window],function fetch() { [native code] }
+// trap apply: add chain with result [object Response]
+// trap get: add microtask with value [object Response],function json() { [native code] }
+// trap apply: add chain with result [object Object]
+// trap get: add microtask with value 436
+```
 
 ## Examples
 ### await
@@ -104,7 +120,7 @@ const a = async(axios.get('https://api.github.com/repositories'))
 ## Pros
 There are some other packages for a similar use case, but this one is:
 
-- Tiny: ~17KB minified.
+- Tiny: ~18KB minified.
 - Well tested: 100% test coverage.
 - Safe: No known vulnerabilities according to npm audit.
 - Self contained: No external dependencies (only devDependencies).

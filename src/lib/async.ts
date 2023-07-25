@@ -1,5 +1,14 @@
+const PROPERTY = {
+  THEN: 'then',
+  CATCH: 'catch',
+  FINALLY: 'finally',
+  CHAIN: 'chain',
+  DEBUG: 'debug',
+};
+
 type TOptions = {
-  debug: boolean;
+  strict?: boolean;
+  debug?: boolean;
 };
 
 const isPropertyExist = <T>(target: T, property: string) => target && typeof target[property as keyof T] !== 'undefined';
@@ -12,6 +21,7 @@ const async = <T>(obj?: T | Promise<T>, options?: TOptions): any => {
     : Promise.resolve(initObj);
 
   const defaultOptions = {
+    strict: false,
     debug: false,
     ...options,
   };
@@ -20,12 +30,12 @@ const async = <T>(obj?: T | Promise<T>, options?: TOptions): any => {
     get(_, property: string) {
       defaultOptions.debug && console.log(`trap get: property ${property}`);
 
-      if (property === 'then' || property === 'catch' || property === 'finally') {
+      if ([PROPERTY.CATCH, PROPERTY.THEN, PROPERTY.FINALLY].includes(property)) {
         return (promiseChain as any)[property].bind(promiseChain);
       }
 
       promiseChain = promiseChain.then((target: any) => {
-        if (property === 'chain') {
+        if ([PROPERTY.CHAIN, PROPERTY.DEBUG].includes(property)) {
           return [target, property];
         }
 
@@ -62,8 +72,11 @@ const async = <T>(obj?: T | Promise<T>, options?: TOptions): any => {
         try {
           const [args, next] = data;
 
-          if (next === 'chain') {
+          if (next === PROPERTY.CHAIN) {
             result = await argumentsList[0](args);
+          } else if (next === PROPERTY.DEBUG) {
+            defaultOptions.debug = true;
+            result = args;
           } else {
             result = await next.apply(args, argumentsList);
           }
