@@ -54,7 +54,7 @@ async()
 ```
 
 ## API
-### `.chain(function): function.apply()`
+### `.chain(fun): Promise<fun.apply(...args)>`
 You can also use a special `.chain` method to combine chains by passing a function to the method.
 The function will take as arguments the result of the execution of the previous promise.
 ```js
