@@ -20,8 +20,7 @@ jobs:
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      - run: npm run-script build
-
+          
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
@@ -32,6 +31,7 @@ jobs:
           node-version: 14
           registry-url: https://registry.npmjs.org/
       - run: npm ci
+      - run: npm run-script build
       - run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
