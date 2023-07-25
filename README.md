@@ -12,7 +12,7 @@ The async-chaining library provides a toolkit for creating asynchronous chains o
 - [API](#api)
 - [Examples](#examples)
   - [await](#await)
-  - [.then .catch. .finally](#then-catch-finally)
+  - [.then .catch .finally](#then-catch-finally)
   - [axios](#axios)
 - [Pros](#pros)
 - [Limitations](#limitations)
