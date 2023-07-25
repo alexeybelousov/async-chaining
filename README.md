@@ -4,13 +4,14 @@
 # async-chaining
 The async-chaining library provides a toolkit for creating asynchronous chains of method and property calls. With its help, you can effectively manage asynchronous operations, increasing the efficiency and convenience of development.
 
+[Live demo](https://stackblitz.com/edit/js-ahx1ra?file=index.ts)
+
 ## Table of Contents
 - [Why?](#why)
 - [Getting started](#getting-started)
 - [API](#api)
-- [Demo](#demo)
 - [Examples](#examples)
-  - [fetch](#fetch)
+  - [await](#await)
   - [.then .catch. .finally](#then-catch-finally)
   - [axios](#axios)
 - [Pros](#pros)
@@ -67,9 +68,6 @@ async()
   .json()
   .watchers;
 ```
-
-## Demo
-[Live demo](https://stackblitz.com/edit/js-ahx1ra?file=index.ts)
 
 ## Examples
 ### await
