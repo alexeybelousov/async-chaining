@@ -15,6 +15,6 @@ const p = async(myPromise)
   .trim()
   .toLowerCase()
   .split(' ')
-  .map((str) => str[0].toUpperCase() + str.slice(1));
+  .map((str: string) => str[0].toUpperCase() + str.slice(1));
 
 p.then(console.log); // ['User', 'Name']
