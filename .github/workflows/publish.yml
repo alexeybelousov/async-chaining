@@ -20,6 +20,7 @@ jobs:
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - run: npm build
 
   publish-npm:
     needs: build
@@ -37,7 +38,6 @@ jobs:
           npm version ${{ github.event.inputs.version }}
           git push origin master
           git push origin v${{ github.event.inputs.version }}
-      - run: npm build
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
