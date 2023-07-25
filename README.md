@@ -1,6 +1,6 @@
+![example workflow](https://github.com/alexeybelousov/async-chaining/actions/workflows/publish.yml/badge.svg)
 ![npm](https://img.shields.io/npm/v/async-chaining)
 [![codecov](https://codecov.io/gh/alexeybelousov/async-chaining/branch/master/graph/badge.svg?token=9V8O20Q3BL)](https://codecov.io/gh/alexeybelousov/async-chaining)
-![example workflow](https://github.com/alexeybelousov/async-chaining/actions/workflows/publish.yml/badge.svg)
 
 # async-chaining
 The async-chaining library provides a toolkit for creating asynchronous chains of method and property calls. With its help, you can effectively manage asynchronous operations, increasing the efficiency and convenience of development.
