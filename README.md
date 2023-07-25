@@ -1,3 +1,4 @@
+![npm](https://img.shields.io/npm/v/async-chaining)
 [![codecov](https://codecov.io/gh/alexeybelousov/async-chaining/branch/master/graph/badge.svg?token=9V8O20Q3BL)](https://codecov.io/gh/alexeybelousov/async-chaining)
 
 # async-chaining
