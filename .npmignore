@@ -9,3 +9,4 @@ coverage/
 tsconfig.json
 webpack.config.js
 .idea
+jest.config.json
