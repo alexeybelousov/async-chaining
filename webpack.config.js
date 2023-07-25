@@ -2,7 +2,7 @@ const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = ({ development }) => ({
-  entry: './src/index.js',
+  entry: './src/index.ts',
   devtool: 'inline-source-map',
   mode: development ? 'development' : 'production',
   output: {

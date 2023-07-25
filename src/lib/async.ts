@@ -1,12 +1,11 @@
-/**
- * Проверяем
- * @param {Object} target - target
- * @param {string} property - property of target
- * @returns {boolean} -
- */
-const isPropertyExist = (target, property) => target && typeof target[property] !== 'undefined';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type TOptions = {
+  debug: boolean;
+};
 
-const async = (obj, options) => {
+const isPropertyExist = <T>(target: T, property: string) => target && typeof target[property as keyof T] !== 'undefined';
+
+const async = <T>(obj?: T | Promise<T>, options?: TOptions): any => {
   const initObj = obj || window;
 
   let promiseChain = initObj instanceof Promise
@@ -18,15 +17,15 @@ const async = (obj, options) => {
     ...options,
   };
 
-  const createProxy = () => new Proxy(Function, {
-    get(_, property) {
+  const createProxy = (): any => new Proxy(Function, {
+    get(_, property: string) {
       defaultOptions.debug && console.log(`trap get: property ${property}`);
 
       if (property === 'then' || property === 'catch' || property === 'finally') {
-        return promiseChain[property].bind(promiseChain);
+        return (promiseChain as any)[property].bind(promiseChain);
       }
 
-      promiseChain = promiseChain.then((target) => {
+      promiseChain = promiseChain.then((target: any) => {
         if (property === 'chain') {
           return [target, property];
         }
@@ -39,7 +38,7 @@ const async = (obj, options) => {
           return null;
         }
 
-        let value;
+        let value: any;
 
         if (typeof target[property] === 'function') {
           value = [target, target[property]];
@@ -55,10 +54,10 @@ const async = (obj, options) => {
       return createProxy();
     },
 
-    apply(_, __, argumentsList) {
+    apply(_, __, argumentsList: any[]) {
       defaultOptions.debug && console.log(`trap apply: call with arguments ${argumentsList}`);
 
-      promiseChain = promiseChain.then(async (data) => {
+      promiseChain = promiseChain.then(async (data: any[T]) => {
         let result;
 
         try {

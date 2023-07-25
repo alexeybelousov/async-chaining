@@ -4,10 +4,10 @@ global.fetch = jest.fn(() =>
   Promise.resolve({
     json: () => Promise.resolve({ username: 'Username' }),
   })
-);
+) as jest.Mock;
 
 beforeEach(() => {
-  fetch.mockClear(); 
+  (fetch as any).mockClear();
 });
 
 describe('async-chaining library:', () => {
