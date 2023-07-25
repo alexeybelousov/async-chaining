@@ -1,5 +1,4 @@
 /dist
 /test
 /node_modules
-webpack.config.ts
-
+webpack.config.js

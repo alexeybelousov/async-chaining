@@ -5,15 +5,18 @@
 The async-chaining library provides a toolkit for creating asynchronous chains of method and property calls. With its help, you can effectively manage asynchronous operations, increasing the efficiency and convenience of development.
 
 ## Table of Contents
-- [Motivation](#motivation)
+- [Why?](#why)
 - [Getting started](#getting-started)
+- [API](#api)
+- [Demo](#demo)
 - [Examples](#examples)
   - [fetch](#fetch)
   - [.then .catch. .finally](#then-catch-finally)
   - [axios](#axios)
+- [Pros](#pros)
 - [Limitations](#limitations)
 
-## Motivation
+## Why?
 During the development process, we often encounter cases when we need to use a chain of asynchronous calls. For convenience, JavaScript provides us with additional tools in the form of promises and async/await constructs.
 [About promise chaining](https://javascript.info/promise-chaining)
 ```js
@@ -39,21 +42,7 @@ To install, run:
 ```bash
 npm i async-chaining
 ```
-Call the async function with empty arguments or pass a promise to it.
-```js
-import { async } from 'async-chaining';
-
-async()
-  .fetch('https://api.github.com/repositories')
-  .json()
-  .then(console.log);
-  
-async(fetch('https://api.github.com/repositories'))
-  .json()
-  .then(console.log);
-```
-You can also add asynchronous result properties and methods, prototypes, and array accessors to the chain.
-If there is an undefined property at any point in the chain or an error occurs, the entire result will return null.
+Import async function and call it. You can also add asynchronous result properties and methods, prototypes, and array accessors to the chain. If there is an undefined property at any point in the chain or an error occurs, the entire result will return null.
 ```js
 import { async } from 'async-chaining';
 
@@ -63,11 +52,12 @@ async()
   .find(repo => repo.name === 'ambition')
   .id;
 ```
-You can also use a special ".chain" method to combine chains by passing a function to the method.
+
+## API
+### `.chain(function): function.apply()`
+You can also use a special `.chain` method to combine chains by passing a function to the method.
 The function will take as arguments the result of the execution of the previous promise.
 ```js
-import { async } from 'async-chaining';
-
 async()
   .fetch('https://api.github.com/repositories')
   .json()
@@ -78,17 +68,20 @@ async()
   .watchers;
 ```
 
+## Demo
+[Live demo](https://stackblitz.com/edit/js-ahx1ra?file=index.ts)
+
 ## Examples
 ### await
 ```js
-import { async } from 'async-chaining';
-
-const repoId = await async(fetch('https://api.github.com/repositories'))
-  .json()
-  .find(repo => repo.name === 'ambition')
-  .id;
-  
-console.log(repoId);
+(async () => {
+  const repoId = await async(fetch('https://api.github.com/repositories'))
+    .json()
+    .find(repo => repo.name === 'ambition')
+    .id;
+    
+  console.log(repoId);
+})();
 ```
 ### .then .catch .finally
 ```js
@@ -101,7 +94,6 @@ async()
 ```
 ### axios
 ```js
-import { async } from 'async-chaining';
 import axios from 'axios';
 
 const a = async(axios.get('https://api.github.com/repositories'))
@@ -110,6 +102,14 @@ const a = async(axios.get('https://api.github.com/repositories'))
   .id
   .then(console.log);
 ```
+## Pros
+There are some other packages for a similar use case, but this one is:
+
+- Tiny: ~7KB minified.
+- Well tested: 100% test coverage.
+- Safe: No known vulnerabilities according to npm audit.
+- Self contained: No external dependencies (only devDependencies).
+
 ## Limitations
 The library supports use in the browser and is implemented using a built-in Proxy object that allows you to intercept calls in the chain.
 [Browser Compatibility](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy#browser_compatibility)
