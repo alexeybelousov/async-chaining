@@ -1,8 +1,6 @@
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable @typescript-eslint/no-var-requires */
-/* eslint-disable @typescript-eslint/semi */
 const { async } = require('async-chaining')
 
+// 1
 const myPromise = new Promise((resolve) => {
   setTimeout(() => {
     resolve({ user: { name: ' USER NAME ' } });
@@ -15,6 +13,14 @@ const p = async(myPromise)
   .trim()
   .toLowerCase()
   .split(' ')
-  .map((str: string) => str[0].toUpperCase() + str.slice(1));
+  .map((str) => str[0].toUpperCase() + str.slice(1));
 
 p.then(console.log); // ['User', 'Name']
+
+// 2
+const b = async({ data: ['ab', 'ba'] })
+  .data
+  .find((v) => v === 'ab')
+  .toUpperCase();
+
+b.then(console.log); // AB
