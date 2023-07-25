@@ -1,8 +1,9 @@
+![example workflow](https://github.com/alexeybelousov/async-chaining/actions/workflows/publish.yml/badge.svg)
 ![npm](https://img.shields.io/npm/v/async-chaining)
 [![codecov](https://codecov.io/gh/alexeybelousov/async-chaining/branch/master/graph/badge.svg?token=9V8O20Q3BL)](https://codecov.io/gh/alexeybelousov/async-chaining)
 
 # async-chaining
-The async-chaining library provides a toolkit for creating asynchronous chains of method and property calls. With its help, you can effectively manage asynchronous operations, increasing the efficiency and convenience of development.
+The `async-chaining` library provides a toolkit for creating asynchronous chains of method and property calls. With its help, you can effectively manage asynchronous operations, increasing the efficiency and convenience of development.
 
 [Live demo](https://stackblitz.com/edit/js-ahx1ra?file=index.ts)
 
@@ -12,7 +13,7 @@ The async-chaining library provides a toolkit for creating asynchronous chains o
 - [API](#api)
 - [Examples](#examples)
   - [await](#await)
-  - [.then .catch. .finally](#then-catch-finally)
+  - [.then .catch .finally](#then-catch-finally)
   - [axios](#axios)
 - [Pros](#pros)
 - [Limitations](#limitations)
@@ -103,7 +104,7 @@ const a = async(axios.get('https://api.github.com/repositories'))
 ## Pros
 There are some other packages for a similar use case, but this one is:
 
-- Tiny: ~7KB minified.
+- Tiny: ~17KB minified.
 - Well tested: 100% test coverage.
 - Safe: No known vulnerabilities according to npm audit.
 - Self contained: No external dependencies (only devDependencies).
