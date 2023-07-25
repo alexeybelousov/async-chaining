@@ -103,7 +103,7 @@ const a = async(axios.get('https://api.github.com/repositories'))
 ## Pros
 There are some other packages for a similar use case, but this one is:
 
-- Tiny: ~7KB minified.
+- Tiny: ~17KB minified.
 - Well tested: 100% test coverage.
 - Safe: No known vulnerabilities according to npm audit.
 - Self contained: No external dependencies (only devDependencies).
