@@ -98,12 +98,11 @@ async()
   .json()
   .watchers;
 
-// ...
-// trap apply: add microtask, data: Window
-// trap get: add microtask, target: Window property: fetch
-// trap apply: add microtask, data: Response
-// trap get: add microtask, target: Response property: json
-// ...
+// trap get: add microtask, target: [object Window], property: fetch
+// trap apply: add microtask, data: [object Window],function fetch() { [native code] }
+// trap get: add microtask, target: [object Response], property: json
+// trap apply: add microtask, data: [object Response],function json() { [native code] }
+// trap get: add microtask, target: [object Object], property: watchers
 ```
 
 ## Examples
@@ -140,7 +139,7 @@ const a = async(axios.get('https://api.github.com/repositories'))
 ## Pros
 There are some other packages for a similar use case, but this one is:
 
-- Tiny: ~18KB minified.
+- Tiny: ~20KB minified.
 - Well tested: 100% test coverage.
 - Safe: No known vulnerabilities according to npm audit.
 - Self contained: No external dependencies (only devDependencies).
