@@ -4,6 +4,7 @@ const PROPERTY = {
   FINALLY: 'finally',
   CHAIN: 'chain',
   DEBUG: 'debug',
+  PROGRESS: 'progress',
 };
 
 type TOptions = {
@@ -35,7 +36,7 @@ const async = <T>(obj?: T | Promise<T>, options?: TOptions): any => {
       }
 
       promiseChain = promiseChain.then((target: any) => {
-        if ([PROPERTY.CHAIN, PROPERTY.DEBUG].includes(property)) {
+        if ([PROPERTY.CHAIN, PROPERTY.DEBUG, PROPERTY.PROGRESS].includes(property)) {
           return [target, property];
         }
 
@@ -76,6 +77,9 @@ const async = <T>(obj?: T | Promise<T>, options?: TOptions): any => {
             result = await argumentsList[0](args);
           } else if (next === PROPERTY.DEBUG) {
             defaultOptions.debug = true;
+            result = args;
+          } else if (next === PROPERTY.PROGRESS) {
+            await argumentsList[0](args);
             result = args;
           } else {
             result = await next.apply(args, argumentsList);

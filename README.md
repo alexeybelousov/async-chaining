@@ -69,7 +69,16 @@ async()
   .json()
   .watchers;
 ```
-### `.debug(): Promise<prev>`
+### `.progress(fun): Transfered data`
+The `.progress` method accepts a function to which the data from the previous step is passed, but the `.progress` method does not return the data, unlike the `.chain` method. Can be used to update the progress of the execution of the chain.
+```js
+async()
+  .progress(() => console.log('start process'))
+  .fetch('https://api.github.com/repositories')
+  .json()
+  .progress(() => console.log('end process'));
+```
+### `.debug(): Transfered data`
 The `.debug` method can help you to debug the chain. Its call activates debugging mode and each step of the chain will be logged into the console.
 ```js
 async()

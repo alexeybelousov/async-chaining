@@ -104,8 +104,8 @@ describe('async-chaining library:', () => {
     });
   });
 
-  describe('.chain method:', () => {
-    test('should accept the function, call it and return promise data', async () => {
+  describe('API methods:', () => {
+    test('.chain() should accept the function, call it and return promise data', async () => {
       async(Promise.resolve({ user: { name: 'User' }}))
         .user
         .name
@@ -117,7 +117,7 @@ describe('async-chaining library:', () => {
         });
     });
 
-    test('should throw error from apply trap', async () => {
+    test('.chain() should throw error from apply trap', async () => {
       async(Promise.resolve({ user: { name: 'User' }}))
         .user
         .name
@@ -128,10 +128,8 @@ describe('async-chaining library:', () => {
           expect(err).toStrictEqual(new TypeError('data.notDefinedMetod is not a function'));
         });
     });
-  });
 
-  describe('.debug method:', () => {
-    test('should be called correctly', async () => {
+    test('.debug() should be called correctly', async () => {
       async(Promise.resolve({ user: { name: 'User' }}))
         .debug()
         .user
@@ -140,6 +138,21 @@ describe('async-chaining library:', () => {
           return data;
         })
         .then((result) => {
+          expect(result).toBe('User');
+        });
+    });
+
+    test('.progress() should be called correctly without changes data', async () => {
+      let count = 0;
+
+      async()
+        .progress(() => count += 1)
+        .chain(() => Promise.resolve({ user: { name: 'User' }}))
+        .user
+        .name
+        .progress(() => count += 1)
+        .then((result) => {
+          expect(count).toBe(2);
           expect(result).toBe('User');
         });
     });
