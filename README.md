@@ -42,7 +42,7 @@ async()
 ## Getting Started
 To install, run:
 ```bash
-npm i async-chaining
+npm i async-chaining -S
 ```
 Import async function and call it. You can also add asynchronous result properties and methods, prototypes, and array accessors to the chain. If there is an undefined property at any point in the chain or an error occurs, the entire result will return null.
 ```js
@@ -56,6 +56,16 @@ async()
 ```
 
 ## API
+### async(data, options): Proxy
+The arguments are optional, but you can send a promise or some other data with the first argument, and options with the second argument
+```js
+async(fetch('https://api.github.com/repositories'), { 
+  debug: true, // default false - see more details .debug()
+  strict: true // default false - throws an error if the method or property does not exist
+})
+  .fetch('https://api.github.com/repositories')
+  .json()
+```
 ### `.chain(fun): Promise<fun.apply(...args)>`
 You can also use a special `.chain` method to combine chains by passing a function to the method.
 The function will take as arguments the result of the execution of the previous promise.
@@ -88,12 +98,12 @@ async()
   .json()
   .watchers;
 
-// trap apply: add chain with result [object Window]
-// trap get: add microtask with value [object Window],function fetch() { [native code] }
-// trap apply: add chain with result [object Response]
-// trap get: add microtask with value [object Response],function json() { [native code] }
-// trap apply: add chain with result [object Object]
-// trap get: add microtask with value 436
+// ...
+// trap apply: add microtask, data: Window
+// trap get: add microtask, target: Window property: fetch
+// trap apply: add microtask, data: Response
+// trap get: add microtask, target: Response property: json
+// ...
 ```
 
 ## Examples

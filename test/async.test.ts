@@ -19,14 +19,6 @@ describe('async-chaining library:', () => {
       expect(result).toBe('Username');
     });
 
-    test('should be called with 2 arguments', async () => {
-      const result = await async(Promise.resolve({ username: 'Username' }), { debug: true })
-        .username
-        .toLowerCase();
-        
-      expect(result).toBe('username');
-    });
-
     test('Accessing a not defined property should return null', async () => {
       async(Promise.resolve(undefined))
         .notDefinedProperty
@@ -35,13 +27,32 @@ describe('async-chaining library:', () => {
         })
     });
 
-    test('Accessing a not defined method should return an error', async () => {
+    test('Accessing a not defined method should return null (because strict mode is false)', async () => {
       async(Promise.resolve({ user: 'User' }))
+        .user
+        .map()
+        .then(result => {
+          expect(result).toBeNull();
+        });
+    });
+  });
+
+  describe('options argument case:', () => {
+    test('should be called with debug true mode', async () => {
+      const result = await async(Promise.resolve({ username: 'Username' }), { debug: true })
+        .username
+        .toLowerCase();
+        
+      expect(result).toBe('username');
+    });
+
+    test('Accessing a not defined method should return an error for strict true mode', async () => {
+      async(Promise.resolve({ user: 'User' }), { strict: true })
         .user
         .map()
         .catch(err => {
           expect(err).toEqual(Error('Property not defined String.map'));
-        })
+        });
     });
   });
 
