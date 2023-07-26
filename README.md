@@ -56,7 +56,7 @@ async()
 ```
 
 ## API
-### async(data, options): Proxy
+### `async(data, options): Proxy`
 The arguments are optional, but you can send a promise or some other data with the first argument, and options with the second argument
 ```js
 async(fetch('https://api.github.com/repositories'), { 
